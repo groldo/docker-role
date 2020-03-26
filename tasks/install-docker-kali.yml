@@ -1,0 +1,8 @@
+- name: copy install script
+  copy:
+    src: install-docker.sh
+    dest: "{{ kali_docker_install_src }}/install-docker.sh"
+    mode: '0755'
+
+- name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+  shell: "{{ kali_docker_install_src }}/install-docker.sh"

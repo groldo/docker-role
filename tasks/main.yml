@@ -1,0 +1,48 @@
+---
+- include_tasks: install-docker-debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include_tasks: install-docker-kali.yml
+  when: ansible_os_family == 'Kali GNU/Linux'
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Ensure old versions of Docker are not installed.
+  become: yes
+  package:
+    name:
+      - docker
+      - docker-engine
+    state: absent
+
+- name: Install docker, docker-compose and dependencies
+  become: yes
+  package:
+    name:
+      - python3-pip
+      - docker-ce
+      - docker-compose
+  notify: restart docker
+
+- name: install docker pip module
+  become: yes
+  pip:
+    name: docker
+
+- name: Ensure Docker is started and enabled at boot.
+  become: yes
+  service:
+    name: docker
+    state: "{{ docker_service_state }}"
+    enabled: "{{ docker_service_enabled }}"
+
+- name: Ensure docker users are added to the docker group.
+  become: yes
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: true
+  with_items: "{{ docker_users }}"
