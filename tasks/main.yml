@@ -31,7 +31,7 @@
   become: yes
   pip:
     name: docker
-    executor: pip3
+    executable: pip3
 
 - name: Ensure Docker is started and enabled at boot.
   become: yes
