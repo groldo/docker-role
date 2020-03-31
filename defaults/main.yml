@@ -12,8 +12,4 @@ docker_apt_gpg_key: https://download.docker.com/linux/{{ ansible_distribution | 
 
 docker_users: [vagrant]
 
-docker_install_compose: true
-docker_compose_version: "1.25.4"
-docker_compose_path: /usr/local/bin/docker-compose
-
 kali_docker_install_src: "{{ ansible_user_dir }}"

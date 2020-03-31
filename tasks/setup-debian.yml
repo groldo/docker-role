@@ -1,6 +1,5 @@
 ---
 # tasks file for docker-role
-
 - name: Ensure dependencies are installed.
   apt:
     pkg:
@@ -32,5 +31,3 @@
   apt_repository:
     repo: "{{ docker_apt_repository }}"
     state: present
-    #update_cache: true
-
