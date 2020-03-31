@@ -1,8 +1,8 @@
 ---
-- include_tasks: install-docker-debian.yml
+- include_tasks: setup-debian.yml
   when: ansible_os_family == 'Debian'
 
-- include_tasks: install-docker-kali.yml
+- include_tasks: setup-kali.yml
   when: ansible_os_family == 'Kali GNU/Linux'
 
 - name: Run the equivalent of "apt-get update" as a separate step
