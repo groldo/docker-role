@@ -18,14 +18,20 @@
       - docker-engine
     state: absent
 
-- name: Install docker, docker-compose and dependencies
+- name: Install docker with recommended packages
   become: yes
-  package:
+  apt:
+    name:
+      - docker-ce
+    install_recommends: yes
+  notify: restart docker
+
+- name: Install docker-compose and pip
+  become: yes
+  apt:
     name:
       - python3-pip
-      - docker-ce
       - docker-compose
-  notify: restart docker
 
 - name: install docker pip module
   become: yes
