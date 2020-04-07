@@ -10,7 +10,7 @@ docker_apt_repository: "deb [arch={{ docker_apt_arch }}] https://download.docker
 docker_apt_ignore_key_error: true
 docker_apt_gpg_key: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
 
-docker_users: [vagrant]
+docker_users: ["vagrant"]
 
 kali_docker_apt_gpg_key: https://download.docker.com/linux/debian/gpg
 kali_docker_install_src: "{{ ansible_user_dir }}"

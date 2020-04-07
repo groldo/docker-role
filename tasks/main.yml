@@ -1,4 +1,13 @@
 ---
+- name: Ensure dependencies are installed.
+  become: yes
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg2
+    state: present
+
 - include_tasks: setup-debian.yml
   when: ansible_os_family == 'Debian'
 
@@ -36,7 +45,8 @@
 - name: install docker pip module
   become: yes
   pip:
-    name: docker
+    name:
+      - docker
     executable: pip3
 
 - name: Ensure Docker is started and enabled at boot.

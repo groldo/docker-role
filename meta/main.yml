@@ -1,1 +1,16 @@
 ---
+galaxy_info:
+  role_name: docker-role
+  author: groldo
+  description: install docker and docker-compose including dependencies
+  license: BSD
+  min_ansible_version: 2.9
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+    - name: Kali
+      versions:
+        - rolling
+  galaxy_tags: []
+dependencies: []
