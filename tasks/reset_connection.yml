@@ -1,0 +1,14 @@
+---
+- name: check local user
+  delegate_to: localhost
+  command: whoami
+  register: local_user
+  changed_when: local_user.rc == 1
+
+- name: delete connection socket
+  delegate_to: localhost
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/home/{{ local_user.stdout }}/.ansible/cp"

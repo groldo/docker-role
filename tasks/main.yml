@@ -42,11 +42,12 @@
       - python3-pip
       - docker-compose
 
-- name: install docker pip module
+- name: install docker and docker-compose pip module
   become: yes
   pip:
     name:
       - docker
+      - docker-compose
     executable: pip3
 
 - name: Ensure Docker is started and enabled at boot.
@@ -62,4 +63,7 @@
     name: "{{ item }}"
     groups: docker
     append: true
-  with_items: "{{ docker_users }}"
+  loop: "{{ docker_users }}"
+
+- name: include reset connection task
+  include_tasks: reset_connection.yml
